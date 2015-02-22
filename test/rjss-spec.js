@@ -42,7 +42,9 @@ describe('rjss', function () {
   });
 
   it('should process rjss file with one rule and variables', function () {
-
+    var variables = require('../test_data/variables.rjss');
+    // THIS will fail until support is implemented
+    console.log(variables());
   });
 
   it('should process rjss file with one rule and functions and variables', function () {

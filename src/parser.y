@@ -123,35 +123,13 @@ property
   | '*' IDENT wempty      -> $1 + $2      /* cwdoh; */
   ;
 ruleset
-  : selector_list '{' wempty declaration_list '}' wempty    -> { "type": "style", "selector": $1, "declarations": $4 }
+  : IDENT wempty '{' declaration_list '}' wempty    -> { "type": "style", "selector": $1, "declarations": $4 }
   ;
-selector_list
-  : selector                               -> $1
-  | selector_list ',' wempty selector      -> $1 + $2 + ' ' + $4
-  ;
-selector
-  : simple_selector                          -> $1
-  | selector combinator simple_selector      -> $1 + $2 + $3
-  ;
+
 combinator
   : '+' wempty          -> $1
   | '>' wempty          -> $1
   | /* empty */         -> ""
-  ;
-simple_selector
-  : simple_selector_atom_list wempty          -> $1
-  | element_name simple_selector_atom_list wempty    -> $1 + $2
-  ;
-simple_selector_atom_list
-  : simple_selector_atom                -> $1
-  | simple_selector_atom_list simple_selector_atom    -> $1 + $2
-  |                            -> ""
-  ;
-simple_selector_atom
-  : IDENT      -> $1
-  ;
-element_name
-  : IDENT      -> $1
   ;
 
 declaration_list
