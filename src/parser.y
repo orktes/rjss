@@ -123,9 +123,15 @@ property
   | '*' IDENT wempty      -> $1 + $2      /* cwdoh; */
   ;
 ruleset
-  : IDENT wempty '{' declaration_list '}' wempty    -> { "type": "style", "selector": $1, "declarations": $4 }
+  : rule_base '{' declaration_list '}' wempty    -> { "type": "style", "selector": $1[0], "parents": $1[1], "declarations": $3 }
   ;
-
+rule_base
+  : IDENT wempty parent -> [$1, $3]
+  ;
+parent
+  : wempty                  -> []
+  | EXTENDS wempty IDENT wempty  -> [$3]
+  ;
 combinator
   : '+' wempty          -> $1
   | '>' wempty          -> $1

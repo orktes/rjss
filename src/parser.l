@@ -37,6 +37,8 @@ range		\?{1,6}|{h}(\?{0,5}|{h}(\?{0,4}|{h}(\?{0,3}|{h}(\?{0,2}|{h}(\??|{h})))))
 {ident}"("							{return "FUNCTION";}
 "$"                  {return 'CODE'}
 
+"extends"              {return "EXTENDS";}
+
 {string}							{return 'STRING';}
 {ident}								{return 'IDENT';}
 

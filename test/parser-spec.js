@@ -81,4 +81,11 @@ describe('parser', function () {
     result.imports.length.should.equal(1);
     result.imports[0].file.should.equal('./variable_define.rjss');
   });
+
+  it('should parse rjss file with extends', function () {
+    var result = parser.parse(fs.readFileSync(require.resolve('../test_data/extends.rjss')).toString());
+    result.rulelist.should.exist;
+    result.rulelist.length.should.equal(2);
+    result.rulelist[1].parents[0].should.equal('main');
+  });
 });
