@@ -1,0 +1,30 @@
+{
+  "name": "rjss",
+  "version": "0.0.1",
+  "description": "CSS style syntax for creating inlineable style objects for react-native and react-canvas",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/orktes/rjss.git"
+  },
+  "keywords": [
+    "css",
+    "react",
+    "js",
+    "react-native",
+    "react-canvas"
+  ],
+  "author": "Jaakko Lukkari <jaakko.lukkari@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/orktes/rjss/issues"
+  },
+  "devDependencies": {
+    "jison": "~0.4.15",
+    "mocha": "~2.1.0",
+    "chai": "~2.0.0"
+  }
+}

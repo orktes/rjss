@@ -1,0 +1,10 @@
+@import "./variable_define.rjss";
+
+main {
+  top: 10;
+  left: 0;
+  width: ${width};
+  height: ${height};
+  line-height: calc(20, ${height});
+  fontSize: 12;
+}

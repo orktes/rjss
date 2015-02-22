@@ -1,0 +1,14 @@
+@var width: 100px;
+@var height: 100px;
+@func calc (attr1, attr2) {
+  return attr1 * attr2;
+}
+
+main {
+  top: 10;
+  left: 0;
+  width: ${width};
+  height: ${height};
+  line-height: calc(20, 2);
+  fontSize: 12;
+}

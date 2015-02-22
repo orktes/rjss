@@ -1,0 +1,7 @@
+main {
+  top: 10;
+  left: 0;
+  width: calc(20, ${width});
+  line-height: 20;
+  fontSize: 12;
+}
