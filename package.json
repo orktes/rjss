@@ -26,5 +26,10 @@
     "jison": "~0.4.15",
     "mocha": "~2.1.0",
     "chai": "~2.0.0"
+  },
+  "dependencies": {
+    "lodash": "~3.3.0",
+    "escodegen": "~1.6.1",
+    "esprima": "~2.0.0"
   }
 }

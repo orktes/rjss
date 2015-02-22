@@ -79,5 +79,6 @@ describe('parser', function () {
     var result = parser.parse(fs.readFileSync(require.resolve('../test_data/imports.rjss')).toString());
     result.imports.should.exist;
     result.imports.length.should.equal(1);
+    result.imports[0].file.should.equal('./variable_define.rjss');
   });
 });

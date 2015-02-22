@@ -39,7 +39,8 @@ import
   : IMPORT_SYM wempty string_or_uri ';' wempty
     %{
       $$ = {
-        "import": $3
+        file: JSON.parse($3),
+        line: yylineno
       };
     %}
   ;
@@ -64,9 +65,10 @@ define_item
     $$ = [
       $3,
       {
-        "type": "FUNC",
-        "attributes": $7,
-        "value": $12
+        type: "FUNC",
+        attributes: $7,
+        value: $12,
+        line: yylineno
       }
     ];
   %}
@@ -221,23 +223,23 @@ term
     $$.unary_operator = $1
   %}
   | inline_code                -> $1
-  | string_term                -> {type: "STRING", value: $1}
+  | string_term                -> {type: "STRING", value: $1, line: yylineno}
   ;
 
 computable_term
-  : NUMBER wempty              -> {type: "NUMBER", value: $1}
-  | PERCENTAGE wempty          -> {type: "PERCENTAGE", value: $1}
-  | LENGTH wempty              -> {type: "LENGTH", value: $1}
-  | EMS wempty                 -> {type: "EMS", value: $1}
-  | EXS wempty                 -> {type: "EXS", value: $1}
-  | ANGLE wempty               -> {type: "ANGLE", value: $1}
-  | TIME wempty                -> {type: "TIME", value: $1}
-  | FREQ wempty                -> {type: "FREQ", value: $1}
+  : NUMBER wempty              -> {type: "NUMBER", value: $1, line: yylineno}
+  | PERCENTAGE wempty          -> {type: "PERCENTAGE", value: $1, line: yylineno}
+  | LENGTH wempty              -> {type: "LENGTH", value: $1, line: yylineno}
+  | EMS wempty                 -> {type: "EMS", value: $1, line: yylineno}
+  | EXS wempty                 -> {type: "EXS", value: $1, line: yylineno}
+  | ANGLE wempty               -> {type: "ANGLE", value: $1, line: yylineno}
+  | TIME wempty                -> {type: "TIME", value: $1, line: yylineno}
+  | FREQ wempty                -> {type: "FREQ", value: $1, line: yylineno}
   ;
 
 inline_code
-  : CODE '{' code_block '}'       -> {type: "CODE", value: $3}
-  | FUNCTION wempty expr ')'      -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: $3}
+  : CODE '{' code_block '}'       -> {type: "CODE", value: $3, line: yylineno}
+  | FUNCTION wempty expr ')'      -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: $3, line: yylineno}
   ;
 
 code_block
