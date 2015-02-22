@@ -2,7 +2,7 @@ main {
   top: 10;
   left: 0;
   width: ${width +'px'};
-  height: ${height};
+  height: $height;
   foobar: ${testing + foo + bar(foo).baz}
   line-height: 20;
   fontSize: 12;

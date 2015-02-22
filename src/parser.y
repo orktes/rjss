@@ -223,6 +223,7 @@ computable_term
 
 inline_code
   : CODE '{' code_block '}'       -> {type: "CODE", value: $3, line: yylineno}
+  | CODE IDENT                    -> {type: "CODE", value: $2, line: yylineno}
   | FUNCTION wempty expr ')'      -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: $3, line: yylineno}
   ;
 
