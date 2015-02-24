@@ -4,7 +4,8 @@ main {
   top: 10;
   left: 0;
   width: ${width};
-  height: ${height};
-  line-height: calc(20, ${height});
+  height: ${(function () { return height; })()};
+  line-height: calc(20, 2);
   fontSize: 12;
+  advanced: funwithstatement("bar");
 }

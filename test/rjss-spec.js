@@ -95,8 +95,18 @@ describe('rjss', function () {
     });
   });
 
-  it.skip('should process rjss file with imports', function () {
-
+  it('should process rjss file with imports', function () {
+    var imports = require('../test_data/imports.rjss');
+    var data = imports();
+    data.should.deep.equal({
+      top: 10,
+      left: 0,
+      width: '100px',
+      height: '100px',
+      lineHeight: 40,
+      fontSize: 12,
+      advanced: '123bar'
+    });
   });
 
   it('should process rjss file with extends', function () {
