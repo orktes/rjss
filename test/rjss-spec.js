@@ -95,7 +95,7 @@ describe('rjss', function () {
     });
   });
 
-  it('should process rjss file with imports', function () {
+  it.skip('should process rjss file with imports', function () {
 
   });
 
