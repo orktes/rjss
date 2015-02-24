@@ -1,6 +1,6 @@
 @import "./variable_define.rjss";
 
-main {
+foo {
   top: 10;
   left: 0;
   width: ${width};
@@ -8,4 +8,8 @@ main {
   line-height: calc(20, 2);
   fontSize: 12;
   advanced: funwithstatement("bar");
+}
+
+bar extends main {
+  top: 10;
 }
