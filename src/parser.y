@@ -65,7 +65,7 @@ define_item
     $$ = [
       $3,
       {
-        type: "FUNC",
+        type: "FUNC_DEF",
         attributes: $7,
         value: $12,
         line: yylineno
@@ -236,10 +236,11 @@ code_block
   | STRING                       -> $1
   | RANDOM_CONTENT               -> $1
   | FUNCTION                     -> $1
+  | NUMBER                       -> $1
   | "("                          -> $1
   | ")"                          -> $1
   | ";"                          -> $1
-  | code_block code_block        -> $1 + $2
+  | "="                          -> $1
   | code_block code_block        -> $1 + $2
   ;
 

@@ -8,10 +8,5 @@ main {
 }
 
 button extends main {
-  top: 10;
-  left: 0;
-  width: 100px;
-  height: 20;
-  line-Height: 20;
-  fontSize: 12;
+  fontSize: 120;
 }

@@ -70,7 +70,7 @@ describe('parser', function () {
     Object.keys(result.defines).length.should.equal(4);
     result.defines.width.value.should.equal('100px');
     result.defines.height.value.should.equal('100px');
-    result.defines.calc.type.should.equal('FUNC');
+    result.defines.calc.type.should.equal('FUNC_DEF');
     result.defines.calc.attributes.length.should.equal(2);
     result.defines.calc.value.trim().should.equal('return attr1 * attr2;');
   });

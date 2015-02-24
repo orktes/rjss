@@ -6,4 +6,5 @@ main {
   foobar: ${testing + foo + bar(foo).baz}
   line-height: 20;
   fontSize: 12;
+  barfoo: ${(function () { var foo = "bar"; return foo; })();}
 }

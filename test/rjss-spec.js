@@ -8,7 +8,9 @@ var rjss = new RJSS();
 
 require.extensions['.rjss'] = function(module, filename) {
   var result = rjss.parseFile(filename);
-  return module._compile(result.getCode(), filename);
+  var code = result.getCode();
+  //console.log(code);
+  return module._compile(code, filename);
 };
 
 describe('rjss', function () {
@@ -43,18 +45,6 @@ describe('rjss', function () {
 
   it('should process rjss file with one rule and variables', function () {
     var variables = require('../test_data/variables.rjss');
-    // THIS will fail until support is implemented
-    /**
-    main {
-      top: 10;
-      left: 0;
-      width: ${width +'px'};
-      height: $height;
-      foobar: ${testing + foo + bar(foo).baz}
-      line-height: 20;
-      fontSize: 12;
-    }
-    **/
 
     variables({
       width: 10,
@@ -73,21 +63,62 @@ describe('rjss', function () {
       height: 10,
       foobar: 'testfoofoo',
       lineHeight: 20,
-      fontSize: 12
+      fontSize: 12,
+      barfoo: 'bar'
     });
-
-
   });
 
   it('should process rjss file with one rule and functions and variables', function () {
+    var funcsAndRules = require('../test_data/functions.rjss');
 
+    var data = funcsAndRules({
+      calc: function (a, b) {
+        return a * b;
+      },
+      width: 100
+    });
+
+    data.width.should.equal(20 * 100);
   });
 
   it('should process rjss file with variable defination', function () {
-
+    var variablesDefinations = require('../test_data/variable_define.rjss');
+    var data = variablesDefinations();
+    data.should.deep.equal({
+      top: 10,
+      left: 0,
+      width: '100px',
+      height: '100px',
+      lineHeight: 40,
+      fontSize: 12,
+      advanced: '123bar'
+    });
   });
 
   it('should process rjss file with imports', function () {
 
+  });
+
+  it('should process rjss file with extends', function () {
+    var extended = require('../test_data/extends.rjss');
+    var data = extended('button');
+    data.should.deep.equal({
+      top: 10,
+      left: 0,
+      width: '100px',
+      height: 20,
+      lineHeight: 20,
+      fontSize: 120
+    });
+
+    data = extended('main');
+    data.should.deep.equal({
+      top: 10,
+      left: 0,
+      width: '100px',
+      height: 20,
+      lineHeight: 20,
+      fontSize: 12
+    });
   });
 });
