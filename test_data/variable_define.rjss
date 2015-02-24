@@ -4,6 +4,14 @@
   return attr1 * attr2;
 }
 
+@func funwithstatement (foo) {
+  if (true) {
+    return "foo";
+  } else {
+    return "bar";
+  }
+}
+
 main {
   top: 10;
   left: 0;

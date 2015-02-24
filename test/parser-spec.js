@@ -67,7 +67,7 @@ describe('parser', function () {
   it('should parse rjss file with variable defination', function () {
     var result = parser.parse(fs.readFileSync(require.resolve('../test_data/variable_define.rjss')).toString());
     result.defines.should.exist;
-    Object.keys(result.defines).length.should.equal(3);
+    Object.keys(result.defines).length.should.equal(4);
     result.defines.width.value.should.equal('100px');
     result.defines.height.value.should.equal('100px');
     result.defines.calc.type.should.equal('FUNC');

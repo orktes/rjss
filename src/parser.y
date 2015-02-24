@@ -229,6 +229,7 @@ inline_code
 
 code_block
   : wempty                       -> $1
+  | '{' code_block '}'           -> $1 + $2 + $3
   | IDENT                        -> $1
   | combinator                   -> $1 + " "
   | unary_operator               -> $1 + " "
