@@ -8,7 +8,7 @@ var rjss = new RJSS();
 
 require.extensions['.rjss'] = function(module, filename) {
   var result = rjss.parseFile(filename);
-  return module._compile(result.code, filename);
+  return module._compile(result.getCode(), filename);
 };
 
 describe('rjss', function () {
@@ -44,7 +44,39 @@ describe('rjss', function () {
   it('should process rjss file with one rule and variables', function () {
     var variables = require('../test_data/variables.rjss');
     // THIS will fail until support is implemented
-    console.log(variables());
+    /**
+    main {
+      top: 10;
+      left: 0;
+      width: ${width +'px'};
+      height: $height;
+      foobar: ${testing + foo + bar(foo).baz}
+      line-height: 20;
+      fontSize: 12;
+    }
+    **/
+
+    variables({
+      width: 10,
+      height: 10,
+      testing: "test",
+      foo: "foo",
+      bar: function (attr) {
+        return {
+          baz: attr
+        }
+      }
+    }).should.deep.equal({
+      top: 10,
+      left: 0,
+      width: '10px',
+      height: 10,
+      foobar: 'testfoofoo',
+      lineHeight: 20,
+      fontSize: 12
+    });
+
+
   });
 
   it('should process rjss file with one rule and functions and variables', function () {
