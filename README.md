@@ -95,15 +95,15 @@ button {
 }
 
 green extends button {
-  backgroundColor: "#00FF00"
+  background-color: "#00FF00"
 }
 
 red extends button {
-  backgroundColor: "#FF0000"
+  background-color: "#FF0000"
 }
 
 blue extends button {
-  backgroundColor: "#0000FF"
+  background-color: "#0000FF"
 }
 
 ```
@@ -170,7 +170,7 @@ var styles = require('./functions.rjss');
 @import "./variables.rjss";
 
 header {
-  fontSize: $largeText;
+  font-size: $largeText;
   color: $brandColor;
 }
 
