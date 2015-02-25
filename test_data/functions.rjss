@@ -4,4 +4,5 @@ main {
   width: calc(20, ${width});
   line-height: 20;
   fontSize: 12;
+  color: "#fffff"
 }
