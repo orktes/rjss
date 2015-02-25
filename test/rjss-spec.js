@@ -89,6 +89,7 @@ describe('rjss', function () {
       left: 0,
       width: '100px',
       height: '100px',
+      square: 100 * 100,
       lineHeight: 40,
       fontSize: 12,
       advanced: '123bar'
@@ -115,6 +116,7 @@ describe('rjss', function () {
       width: '100px',
       height: '100px',
       lineHeight: 40,
+      square: 10000,
       fontSize: 12,
       advanced: '123bar'
     });
