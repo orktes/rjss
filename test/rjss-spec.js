@@ -107,6 +107,17 @@ describe('rjss', function () {
       fontSize: 12,
       advanced: '123bar'
     });
+
+    data = imports('bar');
+    data.should.deep.equal({
+      top: 100,
+      left: 0,
+      width: '100px',
+      height: '100px',
+      lineHeight: 40,
+      fontSize: 12,
+      advanced: '123bar'
+    });
   });
 
   it('should process rjss file with extends', function () {

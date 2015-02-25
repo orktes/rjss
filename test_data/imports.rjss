@@ -11,5 +11,5 @@ foo {
 }
 
 bar extends main {
-  top: 10;
+  top: 100;
 }
