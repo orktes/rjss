@@ -55,12 +55,13 @@ var styles = require('./variables.rjss');
 /* variables.rjss */
 
 @var top: 100;
+@var height: ${1000 - top};
 
 main {
   top: $top;
   left: $left;
   width: 100;
-  height: 20;
+  height: $height;
   margin-top: 20;
   margin-bottom: 30;
 }
