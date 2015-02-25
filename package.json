@@ -1,6 +1,6 @@
 {
   "name": "rjss",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CSS style syntax for creating inlineable style objects for react-native and react-canvas",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/orktes/rjss/issues"
+  },
+  "browser": {
+    "fs": false
   },
   "devDependencies": {
     "jison": "~0.4.15",
