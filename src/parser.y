@@ -278,3 +278,25 @@ space_cdata
   | CDO      -> null
   | CDC      -> null
   ;
+
+%%
+
+parser.parseError = function(str, hash) {
+  var unexpected;
+
+  if (hash.token === lexer.EOF) {
+    unexpected = "end of input";
+  } else {
+    unexpected = "'" + hash.text + "'";
+  }
+
+  var str = 'Unexpected ' + unexpected + ' on line ' + hash.line;
+  var error = new Error(str);
+  error.lineNumber = hash.line;
+  error.token = hash.token;
+  error.text = hash.text;
+  error.expected = hash.expected;
+  error.loc = hash.loc;
+
+  throw error;
+};

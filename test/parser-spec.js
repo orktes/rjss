@@ -88,4 +88,14 @@ describe('parser', function () {
     result.rulelist.length.should.equal(2);
     result.rulelist[1].parents[0].should.equal('main');
   });
+
+
+  it('should throw parse error', function () {
+    try {
+      parser.parse(fs.readFileSync(require.resolve('../test_data/parsererror.rjss')).toString());
+    } catch(e) {
+      e.lineNumber.should.equal(5);
+      e.message.should.equal('Unexpected \'foo\' on line 5');
+    }
+  });
 });

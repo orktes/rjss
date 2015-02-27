@@ -1,0 +1,7 @@
+correct {
+  bar: 100px;
+}
+
+incorrect {
+  bar foo 100px;
+}
