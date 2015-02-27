@@ -95,7 +95,7 @@ describe('parser', function () {
       parser.parse(fs.readFileSync(require.resolve('../test_data/parsererror.rjss')).toString());
     } catch(e) {
       e.lineNumber.should.equal(5);
-      e.message.should.equal('Unexpected \'foo\' on line 5');
+      e.message.should.equal('Unexpected \'foo\' on line 6');
     }
   });
 });
