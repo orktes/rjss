@@ -246,10 +246,10 @@ code_block
 
 string_term
   : STRING wempty            -> $1
-  | IDENT wempty             -> $1
-  | URI wempty               -> $1
-  | UNICODERANGE wempty      -> $1
-  | hexcolor                 -> $1
+  | IDENT wempty             -> '"' + $1 + '"';
+  | URI wempty               -> '"' + $1 + '"';
+  | UNICODERANGE wempty      -> '"' + $1 + '"';
+  | hexcolor                 -> '"' + $1 + '"';
   ;
 operator
   : '/' wempty          -> $1

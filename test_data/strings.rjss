@@ -1,0 +1,5 @@
+main {
+  text-align: center;
+  position: relative;
+  color: #fff;
+}

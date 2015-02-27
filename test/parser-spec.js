@@ -89,6 +89,14 @@ describe('parser', function () {
     result.rulelist[1].parents[0].should.equal('main');
   });
 
+  it('should parse rjss file with strings', function () {
+    var result = parser.parse(fs.readFileSync(require.resolve('../test_data/strings.rjss')).toString());
+    result.rulelist.should.exist;
+    result.rulelist.length.should.equal(1);
+    result.rulelist[0].declarations.textAlign.value.should.equal('"center"');
+    result.rulelist[0].declarations.position.value.should.equal('"relative"');
+    result.rulelist[0].declarations.color.value.should.equal('"#fff"');
+  });
 
   it('should throw parse error', function () {
     try {

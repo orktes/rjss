@@ -41,6 +41,7 @@ range    \?{1,6}|{h}(\?{0,5}|{h}(\?{0,4}|{h}(\?{0,3}|{h}(\?{0,2}|{h}(\??|{h}))))
 
 {string}                         {return 'STRING';}
 {ident}                          {return 'IDENT';}
+"#"{name}                        {return 'HASH';}
 
 "@import"                        {return 'IMPORT_SYM';}
 "@var"                           {return 'VAR_DEFINE_SYM';}

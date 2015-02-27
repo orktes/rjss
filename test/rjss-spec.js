@@ -144,5 +144,16 @@ describe('rjss', function () {
       fontSize: 12
     });
   });
-  
+
+  it('should process rjss file with strings', function () {
+    var strings = require('../test_data/strings.rjss');
+
+    var data = strings();
+
+    data.textAlign.should.equal('center');
+    data.position.should.equal('relative');
+    data.color.should.equal('#fff');
+  });
+
+
 });
