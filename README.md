@@ -1,3 +1,4 @@
+# work in progress
 # rjss
 CSS style syntax for creating inlineable style objects for react-native and react-canvas. RJSS files are precompiled to javascript.
 
