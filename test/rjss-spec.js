@@ -4,11 +4,12 @@ require('chai').should();
 
 
 var RJSS = require('../lib/rjss');
-var rjss = new RJSS();
+var rjss = new RJSS({sourceMap: true});
 
 require.extensions['.rjss'] = function(module, filename) {
   var result = rjss.parseFile(filename);
   var code = result.getCode();
+  //console.log(result.getSourceMap())
   //console.log(code);
   return module._compile(code, filename);
 };

@@ -1,0 +1,15 @@
+@var line1: 100px;
+
+@var line3: 100px;
+@func line4 (foobar) {
+  return foobar;
+}
+
+line8 {
+  line9: 100px;
+  line10: 100px;
+}
+
+line13 {
+ line14: 100px;
+}

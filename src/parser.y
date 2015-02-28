@@ -60,7 +60,7 @@ defines
   |              -> null
   ;
 define_item
-  : FUNC_DEFINE_SYM wempty IDENT wempty '(' wempty function_def_attrs wempty ')' wempty '{' code_block '}'
+  : function_def wempty IDENT wempty '(' wempty function_def_attrs wempty ')' wempty '{' code_block '}'
   %{
     $$ = [
       $3,
@@ -68,15 +68,19 @@ define_item
         type: "FUNC_DEF",
         attributes: $7,
         value: $12,
-        line: yylineno
+        line: $1[1]
       }
     ];
   %}
   | VAR_DEFINE_SYM wempty declaration ";" -> $3
   | space_cdata_list                  -> null
   ;
+function_def
+  : FUNC_DEFINE_SYM -> [$1, yylineno]
+  ;
 function_def_attrs
-  : IDENT
+  : wempty -> []
+  | IDENT
   %{
     $$ = [];
     if ( $1 !== null )
@@ -123,10 +127,10 @@ property
   | '*' IDENT wempty      -> $1 + $2      /* cwdoh; */
   ;
 ruleset
-  : rule_base '{' declaration_list '}' wempty    -> { "type": "style", "selector": $1[0], "parents": $1[1], "declarations": $3 }
+  : rule_base '{' declaration_list '}' wempty    -> { "type": "style", "selector": $1[0], "parents": $1[1], "declarations": $3, "line": $1[2] }
   ;
 rule_base
-  : IDENT wempty parent -> [$1, $3]
+  : IDENT wempty parent -> [$1, $3, yylineno]
   ;
 parent
   : wempty                  -> []
