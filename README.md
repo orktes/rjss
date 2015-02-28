@@ -1,5 +1,7 @@
-# work in progress
-webpack and browserify transformers will be published soon. You can try RJSS out now in the playground http://orktes.github.io/rjss-playground/.
+# NOTE that is a WIP
+- Playground http://orktes.github.io/rjss-playground/
+- Webpack loader https://github.com/orktes/rjss-loader
+- Browserify plugin TODO
 # rjss
 CSS style syntax for creating inlineable style objects for react-native and react-canvas. RJSS files are precompiled to javascript.
 
