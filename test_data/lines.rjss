@@ -12,4 +12,8 @@ line8 {
 
 line13 {
  line14: 100px;
+ line15: ${(function () {
+   return "line16"
+ })()};
+ line18: 100px;
 }

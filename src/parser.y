@@ -226,13 +226,16 @@ computable_term
   ;
 
 inline_code
-  : CODE '{' code_block '}'       -> {type: "CODE", value: $3, line: yylineno}
-  | CODE IDENT                    -> {type: "CODE", value: $2, line: yylineno}
+  : code_sym '{' code_block '}'       -> {type: "CODE", value: $3, line: $1}
+  | code_sym IDENT                    -> {type: "CODE", value: $2, line: $1}
   | FUNCTION wempty expr ')'      -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: $3, line: yylineno}
   ;
-
+code_sym
+  : CODE                         -> yylineno
+  ;
 code_block
-  : wempty                       -> $1
+  : S                            -> $1
+  |                              -> $1
   | '{' code_block '}'           -> $1 + $2 + $3
   | IDENT                        -> $1
   | combinator                   -> $1 + " "

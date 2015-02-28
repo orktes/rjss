@@ -5,13 +5,12 @@ var RJSS = require('../lib/rjss');
 var rjss = new RJSS({sourceMap: true});
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
 
-describe('parser', function () {
+describe('source maps', function () {
   it('should generate a source map', function () {
 
     var file = require.resolve('../test_data/lines.rjss');
     var result = rjss.parseFile(file);
     var code = result.getCode();
-
     var map = result.getSourceMap();
 
     var consumer = new SourceMapConsumer(map);
@@ -24,7 +23,11 @@ describe('parser', function () {
       [10,9],
       [11,10],
       [14,13],
-      [16,14]
+      [16,14],
+      [17,15],
+      [18,16],
+      [19,17],
+      [20,18]
     ];
 
     mapping.forEach(function (lines) {
