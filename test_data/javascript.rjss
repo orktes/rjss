@@ -1,0 +1,45 @@
+@func foobar () {
+  var obj = {};
+  var obj2 = {foobar: ""};
+  var obj3 = {'foobar': 123, foo: true};
+  var arr = [];
+  obj1.foo = "";
+  arr[0] = obj1;
+  obj1['foobar'];
+
+  a < b
+  b > b
+  a <= b
+  a >= b
+
+  -a   // change the sign of a
+  ~a   // bitwise NOT a
+  ++a  // add 1 to a (before using a)
+  a++  // add 1 to a (after using a)
+  --a  // subtract 1 from a (before using a)
+  a--  // subtract 1 from a (after using a)
+
+  a * b    // multiply a by b
+  a / b    // divide a by b
+  a % b    // find the remainder of division of a by b
+  a + b    // add a and b
+  a - b    // subtract b from a
+  a & b    // bitwise a AND b
+  a | b    // bitwise a OR b
+  a ^ b    // bitwise a XOR b
+
+  a << b   // shift a by b bits to the left
+  // (padding with zeros)
+  a >> b   // shift a by b bits to the right
+  // (copying the sign bit)
+  a >>> b  // shift a by b bits to the right
+  // (padding with zeros)
+
+  var fn = function () {
+
+  };
+
+  function fn() {
+
+  }
+}

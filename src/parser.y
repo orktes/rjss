@@ -109,7 +109,7 @@ general_list
       $$ = $1;
       $$.push( $2 );
     %}
-  |  -            > null
+  |  -> null
   ;
 general_item
   : ruleset          -> $1
@@ -244,9 +244,13 @@ code_block
   | RANDOM_CONTENT               -> $1
   | FUNCTION                     -> $1
   | NUMBER                       -> $1
+  | "<"                          -> $1
+  | ">"                          -> $1
   | "("                          -> $1
   | ")"                          -> $1
   | ";"                          -> $1
+  | ":"                          -> $1
+  | ","                          -> $1
   | "="                          -> $1
   | code_block code_block        -> $1 + $2
   ;
