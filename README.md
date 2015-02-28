@@ -4,6 +4,9 @@ CSS style syntax for creating inlineable style objects for react-native and reac
 - Playground http://orktes.github.io/rjss-playground/
 - Webpack loader https://github.com/orktes/rjss-loader
 - Browserify plugin TODO
+- CLI TODO
+- Linter TODO
+- Atom syntax and linter plugin TODO
 
 ## Documentation
 RJSS is still WIP and the parser, syntax and other tools are subject to change.
