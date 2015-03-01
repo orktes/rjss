@@ -98,7 +98,7 @@ describe('parser', function () {
     result.rulelist[0].declarations.color.value.should.equal('"#fff"');
   });
 
-  it.only('should parse rjss with javascript', function () {
+  it('should parse rjss with javascript', function () {
     parser.parse(fs.readFileSync(require.resolve('../test_data/javascript.rjss')).toString());
   });
 

@@ -95,6 +95,18 @@ describe('rjss', function () {
       fontSize: 12,
       advanced: '123bar'
     });
+
+    data = variablesDefinations({width: 0});
+    data.should.deep.equal({
+      top: 10,
+      left: 0,
+      width: 0,
+      height: '100px',
+      square: 100 * 100,
+      lineHeight: 40,
+      fontSize: 12,
+      advanced: '123bar'
+    });
   });
 
   it('should process rjss file with imports', function () {
