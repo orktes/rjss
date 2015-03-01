@@ -78,8 +78,10 @@ describe('parser', function () {
   it('should parse rjss file with imports', function () {
     var result = parser.parse(fs.readFileSync(require.resolve('../test_data/imports.rjss')).toString());
     result.imports.should.exist;
-    result.imports.length.should.equal(1);
-    result.imports[0].file.should.equal('./variable_define.rjss');
+    result.imports.length.should.equal(2);
+    result.imports[0].file.should.equal('./variable_define2.rjss');
+    result.imports[0].name.should.equal('defines2')
+    result.imports[1].file.should.equal('./variable_define.rjss');
   });
 
   it('should parse rjss file with extends', function () {

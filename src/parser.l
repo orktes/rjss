@@ -9,7 +9,7 @@ nmchar    [a-zA-Z0-9-]|{nonascii}|{escape}
 string1    \"([\t !#$%&(-~]|\\{nl}|\'|{nonascii}|{escape})*\"
 string2    \'([\t !#$%&(-~]|\\{nl}|\"|{nonascii}|{escape})*\'
 
-identchar  [_]|{nmchar}
+identchar  [_.]|{nmchar}
 ident    [-]?{nmstart}{identchar}*
 name    {identchar}+
 num      ([0-9]+(\.[0-9]+)?)|(\.[0-9]+)
@@ -38,6 +38,7 @@ range    \?{1,6}|{h}(\?{0,5}|{h}(\?{0,4}|{h}(\?{0,3}|{h}(\?{0,2}|{h}(\??|{h}))))
 "$"                              {return 'CODE'}
 
 "extends"                        {return "EXTENDS";}
+"as"                             {return "AS";}
 
 {string}                         {return 'STRING';}
 {ident}                          {return 'IDENT';}

@@ -1,9 +1,11 @@
+@import "./variable_define2.rjss" as defines2;
 @import "./variable_define.rjss";
 
 foo {
   top: 10;
   left: 0;
-  width: ${width};
+  width: $width;
+  another-width: $defines2.width;
   height: ${(function () { return height; })()};
   line-height: calc(20, 2);
   fontSize: 12;
@@ -11,5 +13,9 @@ foo {
 }
 
 bar extends main {
+  top: 100;
+}
+
+baz extends defines2.main {
   top: 100;
 }

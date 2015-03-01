@@ -36,13 +36,18 @@ import_item
   | space_cdata_list    -> null
   ;
 import
-  : IMPORT_SYM wempty string_or_uri ';' wempty
+  : IMPORT_SYM wempty string_or_uri import_name ';' wempty
     %{
       $$ = {
         file: JSON.parse($3),
-        line: yylineno
+        line: yylineno,
+        name: $4
       };
     %}
+  ;
+import_name
+  : AS wempty IDENT wempty -> $3
+  | wempty -> null
   ;
 defines
   : define_item
@@ -226,8 +231,8 @@ computable_term
   ;
 
 inline_code
-  : code_sym '{' code_block '}'       -> {type: "CODE", value: $3, line: $1}
-  | code_sym IDENT                    -> {type: "CODE", value: $2, line: $1}
+  : code_sym '{' code_block '}'   -> {type: "CODE", value: $3, line: $1}
+  | code_sym IDENT                -> {type: "CODE", value: $2, line: $1}
   | FUNCTION wempty expr ')'      -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: $3, line: yylineno}
   ;
 code_sym
@@ -244,6 +249,7 @@ code_block
   | RANDOM_CONTENT               -> $1
   | FUNCTION                     -> $1
   | NUMBER                       -> $1
+  | AS                           -> $1
   | "<"                          -> $1
   | ">"                          -> $1
   | "("                          -> $1

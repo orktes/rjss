@@ -115,6 +115,19 @@ describe('rjss', function () {
     data.should.deep.equal({
       top: 10,
       left: 0,
+      anotherWidth: '1000px',
+      width: '100px',
+      height: '100px',
+      lineHeight: 40,
+      fontSize: 12,
+      advanced: '123bar'
+    });
+
+    data = imports({defines2: {width: 10}});
+    data.should.deep.equal({
+      top: 10,
+      left: 0,
+      anotherWidth: 10,
       width: '100px',
       height: '100px',
       lineHeight: 40,
@@ -132,6 +145,12 @@ describe('rjss', function () {
       square: 10000,
       fontSize: 12,
       advanced: '123bar'
+    });
+
+    data = imports('baz');
+    data.should.deep.equal({
+      top: 100,
+      left: 1000
     });
   });
 

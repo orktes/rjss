@@ -1,0 +1,7 @@
+@var width: 1000px;
+@var height: 1000px;
+
+main {
+  top: 10;
+  left: 1000;
+}
