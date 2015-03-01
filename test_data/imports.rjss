@@ -18,4 +18,5 @@ bar extends main {
 
 baz extends defines2.main {
   top: 100;
+  foobar: defines2.foobar("bar");
 }

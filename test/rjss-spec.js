@@ -7,11 +7,16 @@ var RJSS = require('../lib/rjss');
 var rjss = new RJSS({sourceMap: true});
 
 require.extensions['.rjss'] = function(module, filename) {
-  var result = rjss.parseFile(filename);
-  var code = result.getCode();
-  //console.log(result.getSourceMap())
-  //console.log(code);
-  return module._compile(code, filename);
+  try {
+    var result = rjss.parseFile(filename);
+    var code = result.getCode();
+    //console.log(result.getSourceMap())
+    //console.log(code);
+    return module._compile(code, filename);
+  } catch (e) {
+    console.log(filename);
+    console.log(e);
+  }
 };
 
 describe('rjss', function () {
@@ -149,6 +154,16 @@ describe('rjss', function () {
 
     data = imports('baz');
     data.should.deep.equal({
+      foobar: "foobar",
+      top: 100,
+      left: 1000
+    });
+
+    data = imports('baz', {defines2: {foobar: function () {
+      return "barfoo";
+    }}});
+    data.should.deep.equal({
+      foobar: "barfoo",
       top: 100,
       left: 1000
     });

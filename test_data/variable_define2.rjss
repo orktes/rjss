@@ -1,6 +1,10 @@
 @var width: 1000px;
 @var height: 1000px;
 
+@func foobar () {
+  return "foobar";
+}
+
 main {
   top: 10;
   left: 1000;
