@@ -5,7 +5,7 @@
   return attr1 * attr2;
 }
 
-@func funwithstatement (foo) {
+@func funwithstatement(foo) {
   var bar = "bar";
   var fooval = 123;
   if (true || 1 == 1) {

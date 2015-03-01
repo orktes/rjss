@@ -65,20 +65,24 @@ defines
   |              -> null
   ;
 define_item
-  : function_def wempty IDENT wempty '(' wempty function_def_attrs wempty ')' wempty '{' code_block '}'
+  : function_def wempty function_def_name wempty function_def_attrs wempty ')' wempty '{' code_block '}'
   %{
     $$ = [
       $3,
       {
         type: "FUNC_DEF",
-        attributes: $7,
-        value: $12,
+        attributes: $5,
+        value: $10,
         line: $1[1]
       }
     ];
   %}
   | VAR_DEFINE_SYM wempty declaration ";" -> $3
   | space_cdata_list                  -> null
+  ;
+function_def_name
+  : IDENT wempty '('  -> $1
+  | FUNCTION          -> $1.substring(0, $1.length - 1)
   ;
 function_def
   : FUNC_DEFINE_SYM -> [$1, yylineno]
