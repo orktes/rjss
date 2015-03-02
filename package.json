@@ -1,7 +1,7 @@
 {
   "name": "rjss",
   "version": "0.0.9",
-  "description": "CSS style syntax for creating inlineable style objects for react-native and react-canvas",
+  "description": "Style sheet language for creating inlineable style objects for react-native and react-canvas",
   "main": "index.js",
   "scripts": {
     "test": "mocha test --recursive"
