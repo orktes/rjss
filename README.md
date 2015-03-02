@@ -1,5 +1,5 @@
 # rjss
-CSS style syntax for creating inlineable style objects for react-native and react-canvas. RJSS files are precompiled to javascript.
+Style sheet language for creating inlineable style objects for react-native and react-canvas.
 
 - Playground http://orktes.github.io/rjss-playground/
 - Webpack loader https://github.com/orktes/rjss-loader
