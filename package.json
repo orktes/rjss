@@ -33,6 +33,7 @@
   "dependencies": {
     "lodash": "~3.3.0",
     "falafel": "~1.0.1",
-    "source-map": "~0.4.0"
+    "source-map": "~0.4.0",
+    "enhanced-resolve": "~0.8.4"
   }
 }
