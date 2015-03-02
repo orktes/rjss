@@ -1,6 +1,6 @@
 {
   "name": "rjss",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "CSS style syntax for creating inlineable style objects for react-native and react-canvas",
   "main": "index.js",
   "scripts": {
