@@ -1,3 +1,7 @@
+@func calc(a, b) {
+  return a + b;
+}
+
 main {
   top: 10;
   left: 0;

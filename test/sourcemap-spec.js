@@ -9,7 +9,7 @@ describe('source maps', function () {
   it('should generate a source map', function () {
 
     var file = require.resolve('../test_data/lines.rjss');
-    var result = rjss.parseFile(file);
+    var result = rjss.parseFileSync(file);
     var code = result.getCode();
     var map = result.getSourceMap();
 

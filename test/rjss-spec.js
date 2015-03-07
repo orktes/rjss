@@ -7,15 +7,18 @@ var RJSS = require('../lib/rjss');
 var rjss = new RJSS({sourceMap: true});
 
 require.extensions['.rjss'] = function(module, filename) {
+  var code;
   try {
-    var result = rjss.parseFile(filename);
-    var code = result.getCode();
+    var result = rjss.parseFileSync(filename);
+    code = result.getCode();
     //console.log(result.getSourceMap())
+    //console.log("\n" + filename + "\n");
     //console.log(code);
     return module._compile(code, filename);
   } catch (e) {
     console.log(filename);
-    console.log(e);
+    console.log(code);
+    throw e;
   }
 };
 
@@ -190,6 +193,11 @@ describe('rjss', function () {
       lineHeight: 20,
       fontSize: 12
     });
+  });
+
+  it.skip('should process rjss file with macros', function () {
+    var macros = require('../test_data/macros.rjss');
+    macros().foobar.should.be.equal("foobar");
   });
 
   it('should process rjss file with strings', function () {

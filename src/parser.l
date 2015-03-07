@@ -47,6 +47,7 @@ range    \?{1,6}|{h}(\?{0,5}|{h}(\?{0,4}|{h}(\?{0,3}|{h}(\?{0,2}|{h}(\??|{h}))))
 "@import"                        {return 'IMPORT_SYM';}
 "@var"                           {return 'VAR_DEFINE_SYM';}
 "@func"                          {return 'FUNC_DEFINE_SYM';}
+"@macro"                         {return 'MACRO_DEFINE_SYM';}
 
 {num}"em"                        {return 'EMS';}
 {num}"ex"                        {return 'EXS';}

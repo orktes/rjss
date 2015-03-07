@@ -3,15 +3,19 @@
 %%
 
 stylesheet
-  : import_list defines general_list
+  : import_list variable_map function_map macro_map rule_map
     %{
       $$ = {};
       if ( $1 )
         $$["imports"]  = $1;
       if ( $2 )
-        $$["defines"]  = $2;
+        $$["variables"]  = $2;
       if ( $3 )
-        $$["rulelist"]  = $3;
+        $$["functions"]  = $3;
+      if ( $4 )
+        $$["macros"]  = $4;
+      if ( $5 )
+        $$["rules"]  = $5;
 
       return $$;
     %}
@@ -49,14 +53,14 @@ import_name
   : AS wempty IDENT wempty -> $3
   | wempty -> null
   ;
-defines
-  : define_item
+variable_map
+  : variable_item
     %{
       $$ = {};
       if ( $1 !== null )
         $$[$1[0]] = $1[1];
     %}
-  | defines define_item
+  | variable_map variable_item
     %{
       $$ = $1;
       if ( $2 !== null )
@@ -64,7 +68,26 @@ defines
     %}
   |              -> null
   ;
-define_item
+variable_item
+  : VAR_DEFINE_SYM wempty declaration ";" -> $3
+  | space_cdata_list                  -> null
+  ;
+function_map
+  : function_item
+    %{
+      $$ = {};
+      if ( $1 !== null )
+        $$[$1[0]] = $1[1];
+    %}
+  | function_map function_item
+    %{
+      $$ = $1;
+      if ( $2 !== null )
+        $$[$2[0]] = $2[1];
+    %}
+  |              -> null
+  ;
+function_item
   : function_def wempty function_def_name wempty function_def_attrs wempty ')' wempty '{' code_block '}'
   %{
     $$ = [
@@ -77,7 +100,36 @@ define_item
       }
     ];
   %}
-  | VAR_DEFINE_SYM wempty declaration ";" -> $3
+  | space_cdata_list                  -> null
+  ;
+macro_map
+  : macro_item
+    %{
+      $$ = {};
+      if ( $1 !== null )
+        $$[$1[0]] = $1[1];
+    %}
+  | macro_map macro_item
+    %{
+      $$ = $1;
+      if ( $2 !== null )
+        $$[$2[0]] = $2[1];
+    %}
+  |              -> null
+  ;
+macro_item
+  : macro_def wempty function_def_name wempty function_def_attrs wempty ')' wempty '{' code_block '}'
+  %{
+    $$ = [
+      $3,
+      {
+        type: "MACRO_DEF",
+        attributes: $5,
+        value: $10,
+        line: $1[1]
+      }
+    ];
+  %}
   | space_cdata_list                  -> null
   ;
 function_def_name
@@ -86,6 +138,9 @@ function_def_name
   ;
 function_def
   : FUNC_DEFINE_SYM -> [$1, yylineno]
+  ;
+macro_def
+  : MACRO_DEFINE_SYM -> [$1, yylineno]
   ;
 function_def_attrs
   : wempty -> []
@@ -106,21 +161,22 @@ string_or_uri
   : STRING wempty      -> $1
   | URI wempty         -> $1
   ;
-general_list
-  : general_item
+rule_map
+  : rule_item
     %{
-      $$ = [];
+      $$ = {};
       if ( $1 !== null )
-        $$.push ( $1 );
+        $$[$1[0]] = $1[1];
     %}
-  | general_list general_item
+  | rule_map rule_item
     %{
       $$ = $1;
-      $$.push( $2 );
+      if ( $2 !== null )
+        $$[$2[0]] = $2[1];
     %}
   |  -> null
   ;
-general_item
+rule_item
   : ruleset          -> $1
   | space_cdata_list -> null
   ;
@@ -136,7 +192,7 @@ property
   | '*' IDENT wempty      -> $1 + $2      /* cwdoh; */
   ;
 ruleset
-  : rule_base '{' declaration_list '}' wempty    -> { "type": "style", "selector": $1[0], "parents": $1[1], "declarations": $3, "line": $1[2] }
+  : rule_base '{' declaration_list '}' wempty    -> [$1[0], { "type": "style", "selector": $1[0], "parents": $1[1], "declarations": $3, "line": $1[2] }]
   ;
 rule_base
   : IDENT wempty parent -> [$1, $3, yylineno]
