@@ -1,7 +1,16 @@
+@import "./macro_import.rjss" as imp;
+
 @macro foobar (attr1, attr2) {
   return attr1 + attr2;
 }
 
+@func foobarbar () {
+  return foobar("foo", "bar" + "bar");
+}
+
 main {
   foobar: foobar("foo", "bar");
+  foobar1: foobar("foobar", 1);
+  foobarbar: foobarbar();
+  barfoo: imp.barfoo("foo", "bar");
 }

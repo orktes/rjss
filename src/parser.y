@@ -3,37 +3,63 @@
 %%
 
 stylesheet
-  : import_list variable_map function_map macro_map rule_map
-    %{
-      $$ = {};
-      if ( $1 )
-        $$["imports"]  = $1;
-      if ( $2 )
-        $$["variables"]  = $2;
-      if ( $3 )
-        $$["functions"]  = $3;
-      if ( $4 )
-        $$["macros"]  = $4;
-      if ( $5 )
-        $$["rules"]  = $5;
+  : source_elements
+  %{
+    var map = {};
+    _.each($1, function (item) {
+      var type = item[0];
+      item = item[1];
 
-      return $$;
-    %}
+      switch (type) {
+        case "rule":
+          map.rules = map.rules || {};
+          map.rules[item[0]] = item[1];
+        break;
+        case "variable":
+          map.variables = map.variables || {};
+          map.variables[item[0]] = item[1];
+        break;
+        case "function":
+          map.functions = map.functions || {};
+          map.functions[item[0]] = item[1];
+        break;
+        case "macro":
+          map.macros = map.macros || {};
+          map.macros[item[0]] = item[1];
+        break;
+        case "import":
+          map.imports = map.imports || [];
+          map.imports.push(item);
+        break;
+      }
+
+    });
+    return map;
+  %}
   ;
-import_list
-  : import_item
-    %{
-      $$ = [];
-      if ( $1 !== null )
-        $$.push ( $1 );
-    %}
-  | import_list import_item
-    %{
-      $$ = $1;
-      if ( $2 !== null )
-        $$.push ( $2 );
-    %}
-  |              -> null
+
+source_elements
+  : source_element
+  %{
+    $$ = [];
+    if ( $1 !== null && $1[1])
+      $$.push ( $1 );
+  %}
+  | source_elements source_element
+  %{
+    $$ = $1;
+    if ( $2 !== null && $2[1])
+      $$.push ( $2 );
+  %}
+  |   -> null
+  ;
+
+source_element
+  : import_item -> ["import", $1];
+  | variable_item -> ["variable", $1];
+  | rule_item -> ["rule", $1];
+  | macro_item -> ["macro", $1];
+  | function_item -> ["function", $1]
   ;
 import_item
   : import          -> $1
@@ -53,40 +79,12 @@ import_name
   : AS wempty IDENT wempty -> $3
   | wempty -> null
   ;
-variable_map
-  : variable_item
-    %{
-      $$ = {};
-      if ( $1 !== null )
-        $$[$1[0]] = $1[1];
-    %}
-  | variable_map variable_item
-    %{
-      $$ = $1;
-      if ( $2 !== null )
-        $$[$2[0]] = $2[1];
-    %}
-  |              -> null
-  ;
+
 variable_item
   : VAR_DEFINE_SYM wempty declaration ";" -> $3
   | space_cdata_list                  -> null
   ;
-function_map
-  : function_item
-    %{
-      $$ = {};
-      if ( $1 !== null )
-        $$[$1[0]] = $1[1];
-    %}
-  | function_map function_item
-    %{
-      $$ = $1;
-      if ( $2 !== null )
-        $$[$2[0]] = $2[1];
-    %}
-  |              -> null
-  ;
+
 function_item
   : function_def wempty function_def_name wempty function_def_attrs wempty ')' wempty '{' code_block '}'
   %{
@@ -102,21 +100,7 @@ function_item
   %}
   | space_cdata_list                  -> null
   ;
-macro_map
-  : macro_item
-    %{
-      $$ = {};
-      if ( $1 !== null )
-        $$[$1[0]] = $1[1];
-    %}
-  | macro_map macro_item
-    %{
-      $$ = $1;
-      if ( $2 !== null )
-        $$[$2[0]] = $2[1];
-    %}
-  |              -> null
-  ;
+
 macro_item
   : macro_def wempty function_def_name wempty function_def_attrs wempty ')' wempty '{' code_block '}'
   %{
@@ -210,29 +194,16 @@ combinator
 declaration_list
   : declaration_parts
     %{
-
       $$ = {};
       if ( $1 !== null ) {
-        if(!$$[ $1[0] ]){
-          $$[ $1[0] ] = $1[1];
-        } else if(Object.prototype.toString.call($$[ $1[0] ]) === '[object Array]') {
-          $$[ $1[0] ].push($1[1]);
-        } else {
-          $$[ $1[0] ] = [ $$[ $1[0] ], $1[1] ];
-        }
+        $$[$1[0]] = $1[1];
       }
     %}
   | declaration_list declaration_parts
     %{
       $$ = $1;
       if ( $2 !== null ) {
-        if(!$$[ $2[0] ]){
-          $$[ $2[0] ] = $2[1];
-        } else if(Object.prototype.toString.call($$[ $2[0] ]) === '[object Array]') {
-          $$[ $2[0] ].push($2[1]);
-        } else {
-          $$[ $2[0] ] = [ $$[ $2[0] ], $2[1] ];
-        }
+        $$[$2[0]] = $2[1];
       }
     %}
   ;
@@ -293,6 +264,7 @@ computable_term
 inline_code
   : code_sym '{' code_block '}'   -> {type: "CODE", value: $3, line: $1}
   | code_sym IDENT                -> {type: "CODE", value: $2, line: $1}
+  | FUNCTION wempty ')'           -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: [], line: yylineno}
   | FUNCTION wempty expr ')'      -> {type: "FUNC", name: $1.substring(0, $1.length - 1), attributes: $3, line: yylineno}
   ;
 code_sym
@@ -357,6 +329,8 @@ space_cdata
   ;
 
 %%
+
+var _ = require('lodash');
 
 parser.parseError = function(str, hash) {
   var unexpected;

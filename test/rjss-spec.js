@@ -195,9 +195,15 @@ describe('rjss', function () {
     });
   });
 
-  it.skip('should process rjss file with macros', function () {
+  it('should process rjss file with macros', function () {
     var macros = require('../test_data/macros.rjss');
-    macros().foobar.should.be.equal("foobar");
+    var data = macros();
+    data.should.deep.equal({
+      foobar: 'foobar',
+      foobar1: 'foobar1',
+      foobarbar: 'foobarbar',
+      barfoo: 'barfoo'
+    });
   });
 
   it('should process rjss file with strings', function () {

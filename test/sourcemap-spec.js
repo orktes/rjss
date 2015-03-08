@@ -10,7 +10,9 @@ describe('source maps', function () {
 
     var file = require.resolve('../test_data/lines.rjss');
     var result = rjss.parseFileSync(file);
+
     var code = result.getCode();
+    //console.log(code.split('\n').map(function (line, indx) {return[indx+1, line]}));
     var map = result.getSourceMap();
 
     var consumer = new SourceMapConsumer(map);
@@ -24,10 +26,7 @@ describe('source maps', function () {
       [11,10],
       [14,13],
       [16,14],
-      [17,15],
-      [18,16],
-      [19,17],
-      [20,18]
+      [18,18]
     ];
 
     mapping.forEach(function (lines) {

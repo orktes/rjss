@@ -105,6 +105,8 @@ describe('parser', function () {
   it('should parse rjss file with macros', function () {
     var result = parser.parse(fs.readFileSync(require.resolve('../test_data/macros.rjss')).toString());
     result.macros.foobar.should.exist;
+    Object.keys(result.rules.main.declarations).length.should.equal(4);
+
   });
 
   it('should parse rjss with javascript', function () {
