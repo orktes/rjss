@@ -1,7 +1,31 @@
 @import "./macro_import.rjss" as imp;
 
+@var width: 100px;
+
 @macro foobar (attr1, attr2) {
   return attr1 + attr2;
+}
+
+@func calc(attr1, attr2) {
+  return attr1 + attr2;
+}
+
+@macro calcMacro(attr1, attr2) {
+  return attr1 + attr2;
+}
+
+@macro macroReferringToRuntimeFunction (attr1, attr2) {
+  var calculated = calc(attr1, attr2);
+  return calc(calculated, attr2);
+}
+
+@macro macroReferringToRuntimeVariable () {
+  return width;
+}
+
+@macro macroReferringToMacro (attr1, attr2) {
+  var calculated = calcMacro(attr1, attr2);
+  return calc(calculated, attr2);
 }
 
 @func foobarbar () {
@@ -13,4 +37,7 @@ main {
   foobar1: foobar("foobar", 1);
   foobarbar: foobarbar();
   barfoo: imp.barfoo("foo", "bar");
+  another: macroReferringToMacro(1,2);
+  result: macroReferringToRuntimeFunction(1,2);
+  width: macroReferringToRuntimeVariable();
 }
