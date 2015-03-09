@@ -1,0 +1,11 @@
+@var Color : ${require('color')};
+
+@func lighten(hex, percentage) {
+  var color = Color(hex);
+  color.lighten(percentage);
+  return color.hexString();
+}
+
+@macro lighten(hex, percentage) {
+  return lighten(hex, percentage);
+}

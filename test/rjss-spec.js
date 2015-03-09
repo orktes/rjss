@@ -210,6 +210,15 @@ describe('rjss', function () {
     });
   });
 
+  it('should process rjss file with color macros', function () {
+    var color = require('../test_data/color.rjss');
+    var data = color({percentage: 0.2});
+    data.should.deep.equal({
+      color: '#C7B2EB',
+      runtimeColor: '#9871DA'
+    });
+  });
+
   it('should process rjss file with strings', function () {
     var strings = require('../test_data/strings.rjss');
 

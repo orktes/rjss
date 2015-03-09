@@ -35,6 +35,7 @@
     "falafel": "~1.0.1",
     "source-map": "~0.4.0",
     "enhanced-resolve": "~0.8.4",
-    "escodegen": "~1.6.1"
+    "escodegen": "~1.6.1",
+    "color": "~0.8.0"
   }
 }
