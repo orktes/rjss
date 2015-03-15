@@ -162,6 +162,42 @@ var styles = require('./functions.rjss');
 
 ```
 
+```
+### Defining macros in RJSS
+Macros are defined similar to functions. Key difference is that macros are executed compile time rather than in the runtime. Macro names can overlap with runtime functions to provide better usability and optimization when possible.
+
+See example: https://github.com/orktes/rjss/blob/master/mixins/color_submixins/lighten.rjss
+
+```css
+/* macros.rjss */
+
+@var value: 1;
+
+@func min(a, b) {
+  return Math.min(a, b);
+}
+
+@macro min(a, b) {
+  return min(a, b); // Refers to @func min
+}
+
+main {
+  first: min(1, 2); // Precompiled to 1
+  second: min(1, $second); // Will be executed in the runtime
+}
+```
+usage
+```js
+var styles = require('./macros.rjss');
+
+...
+  render: function () {
+    return <View style={styles('main')} />;
+  }
+...
+
+```
+
 ### Import other RJSS files
 
 ```css
