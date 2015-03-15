@@ -161,8 +161,6 @@ var styles = require('./functions.rjss');
 ...
 
 ```
-
-```
 ### Defining macros in RJSS
 Macros are defined similar to functions. Key difference is that macros are executed compile time rather than in the runtime. Macro names can overlap with runtime functions to provide better usability and optimization when possible.
 
@@ -192,7 +190,7 @@ var styles = require('./macros.rjss');
 
 ...
   render: function () {
-    return <View style={styles('main')} />;
+    return <View style={styles('main', {second: 3})} />;
   }
 ...
 
