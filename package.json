@@ -1,6 +1,6 @@
 {
   "name": "rjss",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Style sheet language for creating inlineable style objects for react-native and react-canvas",
   "main": "index.js",
   "scripts": {
