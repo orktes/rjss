@@ -1,0 +1,6 @@
+@import "../mixins/color.rjss";
+
+main {
+  color: lighten("#7743CE", 0.5);
+  runtimeColor: lighten("#7743CE", $percentage);
+}
